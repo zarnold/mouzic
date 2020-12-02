@@ -37,11 +37,13 @@ function launch() {
 }
 
 
-launch()
+launch() 
 // C = Do
 const tunesName=['C','C#','D','D#','E','F','F#','G','G#', 'A','A#','B',]
 console.log(tunesName.length)
 const tuneValues = tunesName.map( (note, idx) => ({name:note, freq:261.626 * (1.05946**idx)}))
-console.log(tuneValues)
+
+
+tuneValues.map(note => new Tune("keyboard", note))
 const A = new Tune("keyboard", { freq:440, name:"A" })
 const B = new Tune("keyboard", { freq:457, name:"B" })
