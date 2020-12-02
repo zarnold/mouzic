@@ -6,4 +6,9 @@ Trying to make a piano Tune
 
 on multiplie par 1.059
 
-261.626	277.183	293.665	311.127	329.628	349.228	369.994	391.995	415.305	440.000
+
+261.626	| 277.183 |	293.665	| 311.127	| 329.628 | 	349.228 | 	369.994 | 	391.995| 	415.305 |	440.000
+
+## Spectre d'un DO ( C ) observé avec Audacity
+
+![do](img/spectre_audacity.PNG)

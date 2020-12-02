@@ -6,3 +6,30 @@ main {
     width: 60%;
     margin: auto;
 }
+
+.keyboard {
+    margin-top: 60px;;
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 200px;
+}
+
+.key {
+    border: 1px solid #000;
+
+    width: 8%;
+
+}
+*
+.whiteKey {
+    background-color: white;
+    height: 100%;
+}
+.blackKey {
+    background-color: black;
+    color: white;
+    height: 50%;
+    margin-left: -25px;
+
+}

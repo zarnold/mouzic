@@ -1,49 +1,72 @@
 var contexteAudio = new (window.AudioContext || window.webkitAudioContext)();
 
-
 class Tune {
-    constructor(targetId, params) {
-        const { freq, name } = params
-        const targetEl = document.getElementById(targetId)
-  
-        this.freq=freq
+  constructor(targetId, params) {
+    const { freq, name, type } = params;
+    const targetEl = document.getElementById(targetId);
 
-        // Creating the button 
-        this.tuneContainer = document.createElement("div")
-        const playButton = document.createElement("button")
-        playButton.addEventListener("click", this.play.bind(this))
-        playButton.innerText =name
-        this.tuneContainer.appendChild(playButton)
-
-        targetEl.appendChild(this.tuneContainer)
+    this.freq = freq;
+    this.type = type;
+    // Creating the button
+    this.tuneContainer = document.createElement("div");
+    const playButton = document.createElement("div");
+    this.tuneContainer.classList.add("key");
+    if (name.includes("#")) {
+      this.tuneContainer.classList.add("blackKey");
+    } else {
+      this.tuneContainer.classList.add("whiteKey");
     }
 
-    play() {
-        console.log(`Playing Frequency ${this.freq}`)
+    this.tuneContainer.addEventListener("click", this.play.bind(this));
+    this.tuneContainer.innerText = name;
 
-        // create Oscillator node
-        var oscillator = contexteAudio.createOscillator();
-        oscillator.connect(contexteAudio.destination);
-        oscillator.type = 'sine';
-        oscillator.frequency.value = this.freq; // valeur en hertz
+    this.tuneContainer.appendChild(playButton);
 
-        oscillator.start();
-        oscillator.stop(contexteAudio.currentTime + 1)
-    }
+    targetEl.appendChild(this.tuneContainer);
+  }
+
+  play() {
+    console.log(`Playing Frequency ${this.freq}`);
+
+    // create Oscillator node
+    var oscillator = contexteAudio.createOscillator();
+    oscillator.connect(contexteAudio.destination);
+    oscillator.type = this.type;
+    oscillator.frequency.value = this.freq; // valeur en hertz
+
+    oscillator.start();
+    oscillator.stop(contexteAudio.currentTime + 1);
+  }
 }
 
 function launch() {
-    console.log("======== Launching")
+  console.log("======== Launching");
 }
 
-
-launch() 
+launch();
 // C = Do
-const tunesName=['C','C#','D','D#','E','F','F#','G','G#', 'A','A#','B',]
-console.log(tunesName.length)
-const tuneValues = tunesName.map( (note, idx) => ({name:note, freq:261.626 * (1.05946**idx)}))
+const tunesName = [
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+  "A",
+  "A#",
+  "B",
+];
+console.log(tunesName.length);
+const tuneValues = tunesName.map((note, idx) => ({
+  name: note,
+  freq: 261.626 * 1.05946 ** idx,
+}));
 
-
-tuneValues.map(note => new Tune("keyboard", note))
-const A = new Tune("keyboard", { freq:440, name:"A" })
-const B = new Tune("keyboard", { freq:457, name:"B" })
+tuneValues.map((note) => new Tune("keyboard", { type:"sine", ...note }));
+tuneValues.map((note) => new Tune("keyboard-square", { type:"square", ...note }));
+tuneValues.map((note) => new Tune("keyboard-sawtooth", { type:"sawtooth", ...note }));
+tuneValues.map((note) => new Tune("keyboard-triangle", { type:"triangle", ...note }));
+tuneValues.map((note) => new Tune("keyboard-custom", { type:"sine", ...note }));
