@@ -10,11 +10,11 @@ Merci à MarcelPatulacci, j_l_22, bebertiii et tout/es les autres pour leur aide
 
 Vous pouvez retrouver : 
 - la vidéo sur [ma chaîne youtube](https://www.youtube.com/channel/UCp2Xw1T7tJjZmkn9oseb5RA)
-- Le code, en libre accès, [sur github](https://github.com/zarnold/mouzic). Vosu pouvez même faire des pull Request et proposez vos modifs si vous le souhaitez ( et savez comment faire évidemment )
-- [l'application elle même](https://zarnold.github.io/mouzic/), enfin du moins dans l'état où on l'a laissé à la fin du stream 
+- Le code, en libre accès, [sur github](https://github.com/zarnold/mouzic). Vous pouvez même faire des pull Request et proposer vos modifs si vous le souhaitez ( et savez comment faire évidemment )
+- [l'application elle même](https://zarnold.github.io/mouzic/), enfin du moins dans l'état où on l'a laissée à la fin du stream 
 - et dans ce document, que vous êtes en train de lire et pouvez retrouver [ici](https://github.com/zarnold/mouzic/blob/main/README.md) quelques prises de notes théoriques ou remarques importantes faites pendant le stream !
 
-Retrouvezplus d'infos sur [mon twitter](https://twitter.com/cepcam)
+Retrouvez plus d'infos sur [mon twitter](https://twitter.com/cepcam)
 ##  Faire des notes
 
 Pour commencer , on a déjà juste essayé de jouer des sons "purs" à une fréquence donnée et il a fallut se demander quelle était la fréquence d'une note appelée "C" ou Do déjà.
