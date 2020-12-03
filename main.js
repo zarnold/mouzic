@@ -46,6 +46,9 @@ function launch() {
 launch();
 // C = Do
 const tunesName = [
+  "A",
+  "A#",
+  "B",
   "C",
   "C#",
   "D",
@@ -55,16 +58,16 @@ const tunesName = [
   "F#",
   "G",
   "G#",
-  "A",
-  "A#",
-  "B",
 ];
-console.log(tunesName.length);
+
+const A_STANDARD_PITCH = 440
+
 const tuneValues = tunesName.map((note, idx) => ({
   name: note,
-  freq: 261.626 * 1.05946 ** idx,
+  freq: A_STANDARD_PITCH * 1.05946 ** idx,
 }));
 
+console.log(tuneValues);
 tuneValues.map((note) => new Tune("keyboard", { type:"sine", ...note }));
 tuneValues.map((note) => new Tune("keyboard-square", { type:"square", ...note }));
 tuneValues.map((note) => new Tune("keyboard-sawtooth", { type:"sawtooth", ...note }));
