@@ -30,8 +30,27 @@ class Tune {
 
     // create Oscillator node
     var oscillator = contexteAudio.createOscillator();
+    if (this.type === "custom") {
+      var real = new Float32Array(10);
+      var imag = new Float32Array(10);
+
+  
+      real = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
+      imag = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
+
+
+      var wave = contexteAudio.createPeriodicWave(real, imag, {
+        disableNormalization: false,
+      });
+      // if you use your own periodic wave,
+      // do not set type
+      oscillator.setPeriodicWave(wave);
+    } else {
+      oscillator.type = this.type;
+    }
+
     oscillator.connect(contexteAudio.destination);
-    oscillator.type = this.type;
+
     oscillator.frequency.value = this.freq; // valeur en hertz
 
     oscillator.start();
@@ -60,16 +79,24 @@ const tunesName = [
   "G#",
 ];
 
-const A_STANDARD_PITCH = 440
+const A_STANDARD_PITCH = 440;
 
 const tuneValues = tunesName.map((note, idx) => ({
   name: note,
   freq: A_STANDARD_PITCH * 1.05946 ** idx,
 }));
 
-console.log(tuneValues);
-tuneValues.map((note) => new Tune("keyboard", { type:"sine", ...note }));
-tuneValues.map((note) => new Tune("keyboard-square", { type:"square", ...note }));
-tuneValues.map((note) => new Tune("keyboard-sawtooth", { type:"sawtooth", ...note }));
-tuneValues.map((note) => new Tune("keyboard-triangle", { type:"triangle", ...note }));
-tuneValues.map((note) => new Tune("keyboard-custom", { type:"sine", ...note }));
+// Functionnal programming
+tuneValues.map((note) => new Tune("keyboard", { type: "sine", ...note }));
+tuneValues.map(
+  (note) => new Tune("keyboard-square", { type: "square", ...note })
+);
+tuneValues.map(
+  (note) => new Tune("keyboard-sawtooth", { type: "sawtooth", ...note })
+);
+tuneValues.map(
+  (note) => new Tune("keyboard-triangle", { type: "triangle", ...note })
+);
+tuneValues.map(
+  (note) => new Tune("keyboard-custom", { type: "custom", ...note })
+);

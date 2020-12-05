@@ -15,9 +15,10 @@ Vous pouvez retrouver :
 - et dans ce document, que vous êtes en train de lire et pouvez retrouver [ici](https://github.com/zarnold/mouzic/blob/main/README.md) quelques prises de notes théoriques ou remarques importantes faites pendant le stream !
 
 Retrouvez plus d'infos sur [mon twitter](https://twitter.com/cepcam)
+
 ##  Faire des notes
 
-Pour commencer , on a déjà juste essayé de jouer des sons "purs" à une fréquence donnée et il a fallut se demander quelle était la fréquence d'une note appelée "C" ou Do déjà.
+Pour commencer , on a déjà juste essayé de jouer des sons "purs" à une fréquence donnée et il a fallut se demander quelle était la fréquence d'une note appelée "C" ou Do.
 
 Il semblerait que la règle en vigueur chez nous, en occident,soit :
 
@@ -98,4 +99,43 @@ Voici la forme d'onde d'un  DO ( C ) observé avec Audacity et sa "transformée 
 
 Juste avant que le logiciel de Streaming ne plante !
 
-Heureusement il existe dans l'API Web Audio une fonction "customWave" qui permet de définir ses propres formes d'ondes en décrivant les harmoniques, ce que nous essaieront de faire une prochaine fois...
+Heureusement il existe dans l'API Web Audio une fonction "customWave" qui permet de définir ses propres formes d'ondes en décrivant les harmoniques.
+
+###  harmoniques
+
+L'API web Audio permet de produire une fonction d'onde personnalisée en fournissant la table des **coefficients réels et imaginaires** de la serie de Fourier de la fonction d'onde à produire.
+
+Avec le Code suivant :
+
+```javascript
+    var oscillator = contexteAudio.createOscillator();
+    if (this.type === "custom") {
+      var real = new Float32Array(10);
+      var imag = new Float32Array(10);
+
+  
+      real = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
+      imag = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
+
+
+      var wave = contexteAudio.createPeriodicWave(real, imag, {
+        disableNormalization: false,
+      });
+      // if you use your own periodic wave,
+      // do not set type
+      oscillator.setPeriodicWave(wave);
+  ```
+  
+On obtient le spectre suivant pour un LA à 440Hz :
+
+![f](img/harmoniques.PNG)
+
+*( on  voit des pics à 440HZ, puis  2 * 440 = 880 puis 3 * 440 = 1420Hz etc. Les petits pics sont dus aux sinus rajoutés par la partie imaginaire )*
+
+Ce spectre nous donne la fonction d'onde suivante :
+
+![t](img/tempor.PNG)
+
+Qui commence à ressembler à un son un peu plus naturel à l'oreille que la sinusoïde pure !
+
+Cependant, on se sait pas exactement ce que sont ces "Coefficients de la série de Fourier"....
