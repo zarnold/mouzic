@@ -31,13 +31,12 @@ class Tune {
     // create Oscillator node
     var oscillator = contexteAudio.createOscillator();
     if (this.type === "custom") {
-      var real = new Float32Array(10);
-      var imag = new Float32Array(10);
+      const n = 64;
+      var real;
+      var imag;
 
-  
-      real = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
-      imag = [0, 0.8, 0.3, 0.5, 0.6, 0.4, 0.3, 0.5,0.4,0.6]
-
+      real = [0,1, 0.4, 0.8, 0.1, 0.3, 0.6, 0.2, 0.1, 0.1, 0.05];
+      imag = new Array(real.length).fill(0);
 
       var wave = contexteAudio.createPeriodicWave(real, imag, {
         disableNormalization: false,

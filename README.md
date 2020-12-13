@@ -139,3 +139,33 @@ Ce spectre nous donne la fonction d'onde suivante :
 Qui commence à ressembler à un son un peu plus naturel à l'oreille que la sinusoïde pure !
 
 Cependant, on se sait pas exactement ce que sont ces "Coefficients de la série de Fourier"....
+
+### Fourier Serie
+
+Cette formule là :
+
+![fourier](img/fourierSerie.PNG)
+
+Se traduit ainsi en code :
+
+```python
+def harmonique(freqFond, nth):
+    return np.cos(2*pi*time*nth*freqFondamental)
+
+
+def generateHarmonic(freqFondamental, N):
+    h=np.zeros((N,len(time)))
+    for i in range(N):
+        h[i] = harmonique(freqFondamental,i+1)
+    return h
+
+def sumHarmonics(f,N, coef):
+    H=generateHarmonic(f,N)
+    e=np.dot(coef,H)
+    return e
+
+
+## N'importe quoi au hasard
+c=np.array([1,0.4,0.8,0.1,0.3,0.6,0.2,0.1,0.1,0.05])
+f=sumHarmonics(440,len(c), c)        
+```
